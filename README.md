@@ -1,7 +1,7 @@
 # Automata Casebook
 
 **Course:** 21CSC301T - Formal Language and Automata  
-**Assessment:** CLA-2, Tasks 2 and 3  
+**Assessment:** CLA-2, Tasks 2
 **Student:** A. Jagan Karthick (RA2411026050020)  
 **Programme:** B.Tech. AIML, SRM Institute of Science and Technology, Tiruchirappalli
 
@@ -17,13 +17,6 @@ A compact Python workbench containing finite automata, context-free grammars and
 
 The examples demonstrate fixed-length recognition, length-bounded state tracking, NFA union and subset construction. All are syntax checks. The roll-ID validator does not confirm enrolment, and a course code is not checked against a live catalogue.
 
-### Task 3 - CFG and PDA case studies
-
-1. **Nested delimiters:** a deterministic stack machine validates `()`, `[]` and `{}`. It ignores delimiter-like characters inside quoted strings.
-2. **Arithmetic expressions:** a precedence-aware CFG is simulated as a CFG-derived NPDA and independently processed by a recursive-descent evaluator.
-3. **Nested arrays:** a CFG recognises arrays containing integers, quoted strings and further arrays. A recursive-descent parser returns the parsed value.
-
-The expression section also contrasts an ambiguous operator grammar with a corrected grammar that gives multiplication higher precedence than addition.
 
 ## Project layout
 
