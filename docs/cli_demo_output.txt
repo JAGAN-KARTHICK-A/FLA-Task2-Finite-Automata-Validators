@@ -1,0 +1,68 @@
+
+TASK 2 | FINITE-STATE VALIDATORS
+========================================================================
+
+Roll Id | states=17 | accepting=1
+  ACCEPT  RA2411026050020
+  ACCEPT  RA1234567890123
+  ACCEPT  RA0000000000000
+  ACCEPT  RA9999999999999
+  ACCEPT  RA0123456789012
+  REJECT  RA241102605002
+  REJECT  ra2411026050020
+  REJECT  RA24110260500200
+  REJECT  RA24110260A020
+  REJECT  RB2411026050020
+
+Username | states=17 | accepting=11
+  ACCEPT  Jagan_24
+  ACCEPT  alpha9
+  ACCEPT  student_name
+  ACCEPT  XyZ_12345
+  ACCEPT  A_bcd
+  ACCEPT  a1234
+  REJECT  2jagan
+  REJECT  abcd
+  REJECT  this_username_is_long
+  REJECT  name-tag
+  REJECT  name space
+  REJECT  _name1
+
+Course Code | states=12 | accepting=1
+  ACCEPT  AIM305
+  ACCEPT  CSE201
+  ACCEPT  ECE110
+  ACCEPT  AIM000
+  ACCEPT  ECE999
+  REJECT  AIM30
+  REJECT  AIM3000
+  REJECT  aim305
+  REJECT  AIM3X5
+  REJECT  EEE202
+  REJECT  CSE20A
+
+Course-code NFA states: 14
+Subset DFA states: 12
+Minimised subset DFA states: 11
+
+TASK 3 | CFG AND PDA CASE STUDIES
+========================================================================
+
+1. Delimiter DPDA: 'call({items[0]}, "ignore ] inside string")' -> ACCEPT
+  start: stack=[Z0]
+  1. read (: push (; stack=['Z0', '(']
+  2. read {: push {; stack=['Z0', '(', '{']
+  3. read [: push [; stack=['Z0', '(', '{', '[']
+  4. read ]: pop [; stack=['Z0', '(', '{']
+  5. read }: pop {; stack=['Z0', '(']
+  6. read ): pop (; stack=['Z0']
+  accept: bottom marker remains
+  CFG/PDA cross-check '([{}])': ACCEPT
+  CFG/PDA cross-check '([)]': REJECT
+  CFG/PDA cross-check '(()': REJECT
+
+2. Expression: 2 + 3 * (4 - 1) -> 11
+   CFG-derived NPDA: ACCEPT (56 configurations)
+
+3. Nested array: [1, [2, 3], "ready", []] -> [1, [2, 3], 'ready', []]
+   CFG-derived NPDA: ACCEPT (65 configurations)

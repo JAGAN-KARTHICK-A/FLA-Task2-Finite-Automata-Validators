@@ -1,0 +1,7 @@
+digraph AmbiguousTrees {
+      graph [bgcolor="white", rankdir=TB, pad="0.25", nodesep="0.35", ranksep="0.48", fontname="DejaVu Sans", labelloc="t", label="Two parses admitted by E → E + E | E * E | NUM"];
+      node [shape=box, style="rounded,filled", fillcolor="#EEF3FB", color="#3157A4", fontname="DejaVu Sans", fontsize=10, margin="0.10,0.06"];
+      edge [color="#64748B", arrowsize=0.65];
+      subgraph cluster_left { label="Parse A: (2 + 3) * 4 = 20"; color="#CBD5E1"; A[label="*"]; A1[label="+"]; A2[label="4"]; A3[label="2"]; A4[label="3"]; A -> A1; A -> A2; A1 -> A3; A1 -> A4; }
+      subgraph cluster_right { label="Parse B: 2 + (3 * 4) = 14"; color="#CBD5E1"; B[label="+"]; B1[label="2"]; B2[label="*"]; B3[label="3"]; B4[label="4"]; B -> B1; B -> B2; B2 -> B3; B2 -> B4; }
+    }

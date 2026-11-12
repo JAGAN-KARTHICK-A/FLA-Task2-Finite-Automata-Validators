@@ -1,0 +1,7 @@
+digraph ArrayTree {
+      graph [bgcolor="white", rankdir=TB, pad="0.25", nodesep="0.28", ranksep="0.48", fontname="DejaVu Sans", labelloc="t", label="Parse structure for nested array [1, [2, 3], ready, []]"];
+      node [shape=box, style="rounded,filled", fillcolor="#EEF3FB", color="#3157A4", fontname="DejaVu Sans", fontsize=10, margin="0.10,0.06"];
+      edge [color="#64748B", arrowsize=0.65];
+      root[label="Array"]; opt[label="OptItems"]; items[label="Items"]; tail[label="Tail"]; v1[label="Value: NUM(1)"]; v2[label="Value: Array"]; v3[label="Value: STR(ready)"]; v4[label="Value: Array([])"]; nested[label="Array [2, 3]"];
+      root -> opt -> items; items -> v1; items -> tail; tail -> v2; tail -> v3; tail -> v4; v2 -> nested;
+    }

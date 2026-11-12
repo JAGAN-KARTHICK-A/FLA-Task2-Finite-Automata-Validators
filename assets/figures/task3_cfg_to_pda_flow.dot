@@ -1,0 +1,17 @@
+digraph CFGPDA {
+      graph [rankdir=LR, bgcolor="white", pad="0.3", nodesep="0.35", ranksep="0.5"];
+      node [shape=box, style="rounded,filled", fillcolor="#EEF3FB", color="#3157A4", fontname="DejaVu Sans", fontsize=10, margin="0.16,0.12"];
+      edge [color="#41536F", penwidth=1.25, arrowsize=0.75, fontname="DejaVu Sans", fontsize=9];
+      grammar [label="CFG\nA → α | β | …"];
+      stack [label="One-state NPDA\nstart stack = S"];
+      expand [label="Top is nonterminal A\nε-expand using A → α"];
+      match [label="Top is terminal t\nread matching input token t"];
+      finish [shape=doublecircle, label="Input consumed\nand stack empty\nACCEPT"];
+      reject [fillcolor="#FDEBE8", color="#B94738", label="No valid move\nREJECT"];
+      grammar -> stack [label="standard conversion"];
+      stack -> expand;
+      expand -> match [label="terminal reaches top"];
+      match -> expand [label="more stack symbols"];
+      match -> finish [label="last symbol matched"];
+      expand -> reject [label="no useful production", style=dashed, color="#B94738"];
+    }

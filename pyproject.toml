@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "automata-casebook"
+version = "1.0.0"
+description = "Finite automata, CFG and PDA models for Formal Language and Automata CLA-2 Tasks 2 and 3"
+requires-python = ">=3.10"
+
+[project.optional-dependencies]
+demo = ["Flask>=3.0"]
+test = ["pytest>=8.0"]
+visuals = ["matplotlib>=3.8", "networkx>=3.2"]
+report = ["python-docx>=1.1"]
+
+[project.scripts]
+automata-casebook = "automata_casebook.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"automata_casebook.web" = ["templates/*.html", "static/*.css"]

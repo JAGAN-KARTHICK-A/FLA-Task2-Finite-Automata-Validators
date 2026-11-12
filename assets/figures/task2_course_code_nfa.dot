@@ -1,0 +1,30 @@
+digraph CourseCode {
+
+      graph [bgcolor="white", pad="0.25", nodesep="0.28", ranksep="0.55", fontname="DejaVu Sans", labeljust="l"];
+      node [shape=circle, style="filled", fillcolor="#EEF3FB", color="#3157A4", penwidth=1.35,
+            fontname="DejaVu Sans", fontsize=10, width=0.58, height=0.58, fixedsize=true];
+      edge [color="#41536F", penwidth=1.2, arrowsize=0.7, fontname="DejaVu Sans", fontsize=9];
+    
+rankdir=LR;
+start [shape=point, width=0.12, label=""];
+start -> s;
+s [label="s"];
+a1 [label="a1"];
+a2 [label="a2"];
+a3 [label="a3"];
+c1 [label="c1"];
+c2 [label="c2"];
+c3 [label="c3"];
+e1 [label="e1"];
+e2 [label="e2"];
+e3 [label="e3"];
+d0 [label="d0"];
+d1 [label="d1"];
+d2 [label="d2"];
+d3 [shape=doublecircle, label="d3"];
+s -> a1 [label="ε"]; s -> c1 [label="ε"]; s -> e1 [label="ε"];
+a1 -> a2 [label="A"]; a2 -> a3 [label="I"]; a3 -> d0 [label="M"];
+c1 -> c2 [label="C"]; c2 -> c3 [label="S"]; c3 -> d0 [label="E"];
+e1 -> e2 [label="E"]; e2 -> e3 [label="C"]; e3 -> d0 [label="E"];
+d0 -> d1 [label="D"]; d1 -> d2 [label="D"]; d2 -> d3 [label="D"];
+label="D = digit. Epsilon branches select AIM, CSE or ECE before the shared 3-digit suffix."; labelloc=b; fontsize=9; fontcolor="#64748B";}

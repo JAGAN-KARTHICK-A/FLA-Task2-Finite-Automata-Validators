@@ -1,0 +1,18 @@
+digraph Brackets {
+
+      graph [bgcolor="white", pad="0.25", nodesep="0.28", ranksep="0.55", fontname="DejaVu Sans", labeljust="l"];
+      node [shape=circle, style="filled", fillcolor="#EEF3FB", color="#3157A4", penwidth=1.35,
+            fontname="DejaVu Sans", fontsize=10, width=0.58, height=0.58, fixedsize=true];
+      edge [color="#41536F", penwidth=1.2, arrowsize=0.7, fontname="DejaVu Sans", fontsize=9];
+    
+rankdir=LR;
+start [shape=point, width=0.12, label=""];
+start -> qstart;
+qstart [label="begin", width=0.75, height=0.55, fixedsize=false];
+qscan [shape=box, style="rounded,filled", width=1.7, height=0.8, fixedsize=false, label="qscan\nread next delimiter"];
+qf [shape=doublecircle, label="accept", width=0.75, height=0.65, fixedsize=false];
+qstart -> qscan;
+qscan -> qscan [label="opener: push\nmatching closer: pop", minlen=3, tailport=s, headport=s];
+qscan -> qf [label="end of input\nstack = Z0"];
+label="Mismatched closing delimiters and leftover opening delimiters reject. Stack symbols are (, [ and {."; labelloc=b; fontsize=9; fontcolor="#64748B";
+}

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Automata Casebook | Interactive Lab</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <p class="eyebrow">21CSC301T · FORMAL LANGUAGE AND AUTOMATA</p>
+      <h1>Automata Casebook</h1>
+      <p class="intro">Try the finite-state validators and pushdown parsers from CLA-2 Tasks 2 and 3.</p>
+    </header>
+    <section class="panel">
+      <label for="mode">Choose a model</label>
+      <select id="mode">
+        <optgroup label="Task 2 · Finite automata">
+          <option value="roll_id">Student roll ID</option>
+          <option value="username">Username rule</option>
+          <option value="course_code">Course code</option>
+        </optgroup>
+        <optgroup label="Task 3 · Pushdown automata / CFG">
+          <option value="brackets">Balanced delimiters</option>
+          <option value="expression">Arithmetic expression</option>
+          <option value="array">Nested array literal</option>
+        </optgroup>
+      </select>
+      <label for="value">Input string</label>
+      <textarea id="value" rows="3" spellcheck="false">RA2411026050020</textarea>
+      <button id="run">Run model</button>
+      <div id="verdict" class="verdict" aria-live="polite">Ready for an input.</div>
+      <p id="note" class="note">The automata check structure. They do not replace account, database or business-rule checks.</p>
+    </section>
+    <section class="panel trace-panel">
+      <h2>Execution trace</h2>
+      <pre id="trace">Choose a model, enter an input, and run it to inspect transitions or stack moves.</pre>
+    </section>
+    <footer>Student: A. Jagan Karthick · RA2411026050020</footer>
+  </main>
+  <script>
+    const mode = document.getElementById('mode');
+    const value = document.getElementById('value');
+    const verdict = document.getElementById('verdict');
+    const trace = document.getElementById('trace');
+    const note = document.getElementById('note');
+    const samples = {
+      roll_id: 'RA2411026050020', username: 'Jagan_24', course_code: 'AIM305',
+      brackets: 'call({items[0]}, "ignore ] here")', expression: '2 + 3 * (4 - 1)',
+      array: '[1, [2, 3], "ready", []]'
+    };
+    mode.addEventListener('change', () => { value.value = samples[mode.value]; });
+    document.getElementById('run').addEventListener('click', async () => {
+      verdict.textContent = 'Running…';
+      try {
+        const response = await fetch('/api/check', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({mode: mode.value, value: value.value}) });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'Request failed');
+        verdict.textContent = data.accepted ? 'ACCEPTED' : 'REJECTED';
+        verdict.className = 'verdict ' + (data.accepted ? 'yes' : 'no');
+        note.textContent = data.note || '';
+        trace.textContent = Array.isArray(data.trace) ? data.trace.map((row, i) => typeof row === 'string' ? row : `${i}. ${JSON.stringify(row)}`).join('\n') : JSON.stringify(data.trace, null, 2);
+      } catch (error) { verdict.textContent = 'Could not run'; verdict.className = 'verdict no'; note.textContent = error.message; }
+    });
+  </script>
+</body>
+</html>
